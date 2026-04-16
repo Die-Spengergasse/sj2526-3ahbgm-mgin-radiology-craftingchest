@@ -7,19 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>birth</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="p : ${patients}">
-                <td th:text="${p.name}"></td>
-                <td th:text="${p.birth}"></td>
-            </tr>
-        </tbody>
+    <table class="table" id="PatientList">
 
     </table>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>Register a new patient</title>
@@ -16,7 +16,7 @@
         }
         p{
             color:#2776C6;
-
+            padding: 5px;
         }
         .form-control{
             color:#2776C6;
@@ -29,7 +29,7 @@
            opacity:1;
         }
        input{
-           margin-bottom: 15px;
+           margin-bottom: 5px;
        }
        #save{
            color:#2776C6;
@@ -47,21 +47,24 @@
     <div class="container">
         <form>
             <p>patient firstname</p>
-            <input   type="text"  class="form-control" placeholder="patient name">
+            <input   type="text"  class="form-control" placeholder="patient name" id="fName">
             <p>patient surname</p>
-            <input  type="text" class="form-control" placeholder="patient surname">
+            <input  type="text" class="form-control" placeholder="patient surname" id="sName">
             <p>birthdate</p>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" id="birth">
             <p>gender</p>
-            <select class="form-control">
+            <select class="form-control" id="gender">
                 <option class="options" value="male">male</option>
                 <option class="options" value="female">female</option>
                 <option class="options" value="other">other</option>
             </select>
             <p>Social security number</p>
-            <input type="number" class="form-control" placeholder="social security number">
-            <input type="submit" class="form-control" id="save" value="Save">
+            <input type="number" class="form-control" id="ssn" placeholder="social security number">
+            <input type="submit" class="btn" data-bs-toggle="button" id="save" value="Save">
         </form>
     </div>
+    <div id="statusBox"></div>
+    <script src=/js/addPatient.js"></script>
+
 </body>
 </html>
