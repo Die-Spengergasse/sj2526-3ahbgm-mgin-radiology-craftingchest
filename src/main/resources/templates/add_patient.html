@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register a new patient</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <style>
@@ -45,26 +45,26 @@
 </section>
 
     <div class="container">
-        <form>
-            <p>patient firstname</p>
-            <input   type="text"  class="form-control" placeholder="patient name" id="fName">
-            <p>patient surname</p>
-            <input  type="text" class="form-control" placeholder="patient surname" id="sName">
-            <p>birthdate</p>
-            <input type="date" class="form-control" id="birth">
-            <p>gender</p>
-            <select class="form-control" id="gender">
+        <form id="form">
+            <label for="fName">patient firstname</label>
+            <input  name="fName" type="text"  class="form-control" placeholder="patient name" id="fName">
+            <label for="sName">patient surname</label>
+            <input  name="sName" type="text" class="form-control" placeholder="patient surname" id="sName">
+            <label>birthdate</label>
+            <input name="birth" type="date" class="form-control" id="birth">
+            <label for="gender">gender</label>
+            <select name="gender" class="form-control" id="gender">
                 <option class="options" value="male">male</option>
                 <option class="options" value="female">female</option>
                 <option class="options" value="other">other</option>
             </select>
-            <p>Social security number</p>
-            <input type="number" class="form-control" id="ssn" placeholder="social security number">
-            <input type="submit" class="btn" data-bs-toggle="button" id="save" value="Save">
+            <label for="ssn">Social security number</label>
+            <input name="ssn" type="text" inputmode="numeric" class="form-control" id="ssn" placeholder="social security number">
+            <button type="submit" class="btn btn-outline-primary" id="save" value="Save"></button>
         </form>
     </div>
     <div id="statusBox"></div>
-    <script src=/js/addPatient.js"></script>
+    <script src="/js/addPatient.js"></script>
 
 </body>
 </html>

@@ -1,53 +1,81 @@
 
 let payload = null;
 const status=document.getElementById("statusBox");
-async function addPatient(){
+function calculatePruefziffer(ssn) {
+    const weights = [3, 7, 9, 5, 8, 4, 2, 1, 6];
+    let sum = 0;
 
-    document.getElementById("form").addEventListener("submit",async(e)=>{
+    let index = 0;
+
+    for (let i = 0; i < 10; i++) {
+        if (i === 3) continue;
+        sum += (ssn.charAt(i) - '0') * weights[index];
+        index++;
+    }
+
+    return sum % 11 === ssn.charAt(3) - '0';
+}
+
+    document.getElementById("form").addEventListener("submit",async(e)=> {
         e.preventDefault();
         const form = new FormData(e.target);
-        const fName=form.get("fName");
-        const sName=form.get("sName");
-        const birthDate=form.get("birth");
-        const gender=form.get("gender");
-        const ssn=form.get("ssn");
+        const fName = form.get("fName");
+        const sName = form.get("sName");
+        const birthDate = form.get("birth");
+        const gender = form.get("gender");
+        const ssn = form.get("ssn");
 
-        payload={
+        payload = {
             fName: fName,
             sName: sName,
             birthDate: birthDate,
             gender: gender,
             ssn: ssn
         }
-            let checkSsn= ssn.toString();
-            let pruefziffer= (parseInt(checkSsn.charAt(0))*2+parseInt(checkSsn.charAt(1))*3+parseInt(checkSsn.charAt(2))*4+parseInt(checkSsn.charAt(3))*5+parseInt(checkSsn.charAt(4))*6+parseInt(checkSsn.charAt(5))*7+parseInt(checkSsn.charAt(6))*8+parseInt(checkSsn.charAt(7))*9+parseInt(checkSsn.charAt(8))*10)%11;
-            if(fName.length===0){
-                status.innerHTML = '<div class="bg-danger text-center">Please write a first Name!</div>'
-
+        let checkSsn = ssn.toString();
+        let pruefziffer = calculatePruefziffer(checkSsn);
+        const birth= new Date(birthDate);
+        if (fName.length === 0) {
+            status.innerHTML = '<div class="bg-danger text-center">Please write a first Name!</div>'
+            return;
+        }
+        if (sName.length === 0) {
+            status.innerHTML = '<div class="bg-danger text-center">Please write a surname! </div>'
+            return;
+        }
+        if (isNaN(birth.getTime())) {
+            status.innerHTML = '<div class="bg-danger text-center"> This Time does not exist!</div>'
+            return;
+        } else if (birth > new Date()) {
+            status.innerHTML = '<div class="bg-danger text-center"> This Time is in the future!</div>'
+            return;
+        }
+        if (!(gender==="male" || gender==="female" || gender==="other")) {
+            status.innerHTML = '<div class="bg-danger text-center"> Please put in a valid gender!</div>'
+            return;
+        }
+        console.log("SSN:", ssn, "Länge:", ssn.length, "Prüfziffer berechnet:", pruefziffer, "SSN[3]:", parseInt(checkSsn[3]));
+        if (ssn.length !== 10 || !calculatePruefziffer(ssn)) {
+            status.innerHTML = '<div class="bg-danger text-center"> Please put in a valid ssn!</div>'
+            return;
+        }
+        console.log("sending....");
+        try {
+            const response = await fetch("patient/add", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                status.innerHTML = '<div class="bg-danger text-center"> Something went wrong!</div>'
+                return;
             }
-            if(sName.length===0){
-                status.innerHTML='<div class="bg-danger text-center">Please write a surname! </div>'
-            }
-            if(!isNaN(birthDate.getTime())){
-                status.innerHTML='<div class="bg-danger text-center"> This Time does not exist!</div>'
-            }
-            else if(birthDate>Date.now()){
-                status.innerHTML='<div class="bg-danger text-center"> This Time is in the future!</div>'
-            }
-            if(!gender.includes("M")||!gender.includes("F")||!gender.includes("D") || !gender.includes("m") || !gender.includes("f") || !gender.includes("d")){
-                status.innerHTML='<div class="bg-danger text-center"> Please put in a valid gender!</div>'
-            }
-            if(ssn.length!==10||!isNaN(ssn)|| parseInt(checkSsn.charAt(4))!==pruefziffer){
-                status.innerHTML='<div class="bg-danger text-center"> Please put in a valid ssn!</div>'
-            }
-
-                const reponse= await fetch("patient/add",{
-                method:"POST",
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(payload)
-                });
-
+        }catch(err){
+            status.innerHTML = '<div class="bg-danger text-center"> Something went wrong!</div>'
+            return;
+        }
+        status.innerHTML= '<div class="bg-success text-center"> Patient added successfully!</div>'
     });
 
 
-}
+
