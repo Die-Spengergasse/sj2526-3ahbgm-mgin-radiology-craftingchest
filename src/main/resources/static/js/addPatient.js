@@ -75,6 +75,7 @@ function calculatePruefziffer(ssn) {
             return;
         }
         status.innerHTML= '<div class="bg-success text-center"> Patient added successfully!</div>'
+        window.location.href="index.html";
     });
 
 

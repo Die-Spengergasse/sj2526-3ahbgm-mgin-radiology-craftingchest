@@ -1,5 +1,7 @@
 package at.spengergasse.spring_thymeleaf.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public class Device {
     private String room;
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private List<Reservation> reservations;
+    @JsonProperty("room")
     public String getRoom() {
         return room;
     }
@@ -23,6 +26,7 @@ public class Device {
     public void setRoom(String room) {
         this.room = room;
     }
+
 
     public String getType() {
         return type;
@@ -38,5 +42,13 @@ public class Device {
     public Device(String room, String type) {
         this.room = room;
         this.type = type;
+    }
+    @JsonIgnore
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public int getId() {
+        return id;
     }
 }

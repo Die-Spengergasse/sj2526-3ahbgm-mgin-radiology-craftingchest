@@ -14,6 +14,7 @@ public class Reservation {
         @ManyToOne
         @JoinColumn(name = "r_d_id")
         private Device device;
+        @Column(name="date")
         private String date;
         @Column(name="r_bodyregion")
         private String bodyregion;

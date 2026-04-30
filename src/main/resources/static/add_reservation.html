@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add a reservation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <style>
+        body{
+            background-color:#EEF4FA;
+        }
+         h1{
+            color:#1B3A5C;
+            font-size: 40px;
+        }
+        p{
+            color:#2776C6;
+            padding: 5px;
+        }
+        .form-control{
+            color:#2776C6;
+        }
+        .options{
+            color:#2776C6;
+        }
+       .form-control::placeholder{
+            color:#2776C6;
+           opacity:1;
+        }
+       input{
+           margin-bottom: 5px;
+       }
+       #save{
+           color:#2776C6;
+           background-color:#EEF4FA;
+           border: 1px solid #2776C6;
+       }
+    </style>
+</head>
+<body>
+<h1> Adding a new Reservation</h1>
+ <form id="reservationForm">
+     <label for="Patients">Select the Patient you want to book</label>
+     <select name="Patients" class="form-control" id="Patients">
+     </select>
+        <label for="Devices">Select the Device you want to book</label>
+        <select name="Devices" class="form-control" id="Devices">
+        </select>
+     <label for="reservationDate"> type in a date that you want to book</label>
+     <input type="date" class="form-control" name="reservationDate" id="reservationDate">
+     <label for="Bodyregion">Body Region</label>
+     <input type="text" class="form-control" name="Bodyregion" id="Bodyregion">
+        <label for="Comments">Comments</label>
+        <input type="text" class="form-control" name="Comments" id="Comments">
+     <button type="submit" class="btn btn-outline-primary" id="save" value="Save"></button>
+ </form>
+<script src="/js/addReservation.js"></script>
+</body>
+</html>
