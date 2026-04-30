@@ -33,8 +33,8 @@ document.getElementById("reservationForm").addEventListener("submit", async e =>
     const form = new FormData(e.target);
 
     const payload = {
-        patientId: form.get("Patients"),    // ✅ gibt die gewählte ID zurück, passt zu ReservationRequest
-        deviceId: form.get("Devices"),      // ✅ gleich
+        patientId: form.get("Patients"),
+        deviceId: form.get("Devices"),
         date: form.get("reservationDate"),
         bodyregion: form.get("Bodyregion"),
         comments: form.get("Comments")

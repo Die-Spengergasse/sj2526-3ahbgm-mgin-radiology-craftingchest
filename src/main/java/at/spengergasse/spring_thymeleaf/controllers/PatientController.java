@@ -18,7 +18,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    // POST /patient/add  — called by addPatient.js
+
     @PostMapping("/add")
     public ResponseEntity<?> addPatient(@RequestBody PatientRequest request) {
         try {
