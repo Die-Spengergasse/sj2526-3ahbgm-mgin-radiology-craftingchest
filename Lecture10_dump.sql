@@ -81,7 +81,7 @@ CREATE TABLE `r_reservation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `r_d_id` int(11) DEFAULT NULL,
   `r_p_id` int(11) DEFAULT NULL,
-  `date` varchar(255) DEFAULT NULL,
+  `date` DATETIME DEFAULT NULL,
   `r_bodyregion` varchar(255) DEFAULT NULL,
   `r_comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),

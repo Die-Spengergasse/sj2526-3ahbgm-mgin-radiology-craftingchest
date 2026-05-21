@@ -8,6 +8,8 @@ import at.spengergasse.spring_thymeleaf.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -26,11 +28,12 @@ public class ReservationService {
     public void addReservation(ReservationRequest request) {
         Patient patient = patientService.findById(request.patientId);
         Device device = deviceService.findById(request.deviceId);
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime reservationTime = LocalDateTime.parse(request.date, formatter);
         Reservation reservation = new Reservation(
                 request.comments,
                 request.bodyregion,
-                request.date,
+                reservationTime,
                 device,
                 patient
         );
