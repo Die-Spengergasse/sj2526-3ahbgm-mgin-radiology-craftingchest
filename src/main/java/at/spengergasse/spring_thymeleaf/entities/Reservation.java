@@ -2,6 +2,9 @@ package at.spengergasse.spring_thymeleaf.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table (name="r_reservation")
 public class Reservation {
@@ -15,7 +18,7 @@ public class Reservation {
         @JoinColumn(name = "r_d_id")
         private Device device;
         @Column(name="date")
-        private String date;
+        private LocalDateTime date;
         @Column(name="r_bodyregion")
         private String bodyregion;
         @Column(name="r_comments")
@@ -53,18 +56,18 @@ public class Reservation {
             this.device = device;
         }
 
-        public String getDate() {
+        public LocalDateTime getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(LocalDateTime date) {
             this.date = date;
         }
 
     public Reservation() {
     }
 
-    public Reservation(String comments, String bodyregion, String date, Device device, Patient patient) {
+    public Reservation(String comments, String bodyregion, LocalDateTime date, Device device, Patient patient) {
         this.comments = comments;
         this.bodyregion = bodyregion;
         this.date = date;

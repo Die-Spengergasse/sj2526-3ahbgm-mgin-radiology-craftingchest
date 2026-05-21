@@ -7,6 +7,7 @@ import at.spengergasse.spring_thymeleaf.entities.Reservation;
 import at.spengergasse.spring_thymeleaf.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,7 +34,7 @@ public class ReservationService {
                 device,
                 patient
         );
-        //Wie wandelt man eine Repository in eine List nochmal um?
+
         List<Reservation> reservations = reservationRepository.findAll();
         for(Reservation r:reservations){
             if(r.getDate().equals(reservation.getDate()) && r.getDevice().getId() == reservation.getDevice().getId()){
