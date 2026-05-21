@@ -33,6 +33,16 @@ public class ReservationService {
                 device,
                 patient
         );
+        //Wie wandelt man eine Repository in eine List nochmal um?
+        List<Reservation> reservations = reservationRepository.findAll();
+        for(Reservation r:reservations){
+            if(r.getDate().equals(reservation.getDate()) && r.getDevice().getId() == reservation.getDevice().getId()){
+                throw new IllegalArgumentException("Device is already reserved for this date: " + reservation.getDate());
+            }
+            else if(r.getDate().equals(reservation.getDate()) && r.getPatient().getId() == patient.getId()){
+                throw new IllegalArgumentException("Patient is already reserved for this date: " + reservation.getDate());
+            }
+        }
         reservationRepository.save(reservation);
     }
 }

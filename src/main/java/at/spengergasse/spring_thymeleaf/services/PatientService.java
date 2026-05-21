@@ -24,6 +24,9 @@ public class PatientService {
             default       -> 'O';
         };
         LocalDate birth = LocalDate.parse(request.birthDate);
+        if(birth.isAfter(LocalDate.now())){
+            throw new IllegalArgumentException("Birth date cannot be in the future: " + birth);
+        }
         long ssn = Long.parseLong(request.ssn);
 
         Patient patient = new Patient(request.fName, request.sName, birth, genderChar, ssn);
