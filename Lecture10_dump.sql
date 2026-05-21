@@ -101,6 +101,32 @@ LOCK TABLES `r_reservation` WRITE;
 INSERT INTO `r_reservation` VALUES (1,9,6,'2020-04-12','Thorax','Yes'),(2,1,1,'2026-05-01 09:00','Kopf','Routineuntersuchung'),(3,2,2,'2026-05-01 10:30','Brustkorb','Verdacht auf Infektion'),(4,3,3,'2026-05-02 14:00','Arm','Frakturkontrolle'),(5,4,4,'2026-05-03 08:15','Bauch','Ultraschall Check'),(6,5,5,'2026-05-03 11:45','Herz','EKG Belastungstest'),(7,1,2,'2026-05-04 13:00','Wirbelsäule','Schmerzen im unteren Rücken'),(8,2,3,'2026-05-04 15:30','Lunge','Kontrolltermin');
 /*!40000 ALTER TABLE `r_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
+#Testdata
+-- d_device (Geräte)
+INSERT INTO `d_device` (`d_room`, `d_type`) VALUES
+                                                ('OP-Saal 3', 'Laparoskop'),
+                                                ('Intensivstation C', 'Beatmungsgerät'),
+                                                ('Neurologie', 'EEG-Gerät'),
+                                                ('Dermatologie', 'Lasertherapiegerät'),
+                                                ('Raum F606', 'Ultraschall');
+
+-- p_patient (Patienten)
+INSERT INTO `p_patient` (`p_birth`, `p_gender`, `p_ssn`, `p_sname`, `p_vname`) VALUES
+                                                                                   ('1990-06-15', 'F', 67890123456, 'Fischer', 'Laura'),
+                                                                                   ('1975-11-23', 'M', 78901234567, 'Bauer', 'Klaus'),
+                                                                                   ('2001-03-08', 'F', 89012345678, 'Wolf', 'Sophie'),
+                                                                                   ('1988-09-14', 'O', 90123456789, 'Becker', 'Alex'),
+                                                                                   ('1955-01-30', 'M', 10111213141, 'Schwarz', 'Hans');
+
+-- r_reservation (Reservierungen) – referenziert bestehende + neue IDs
+INSERT INTO `r_reservation` (`r_d_id`, `r_p_id`, `date`, `r_bodyregion`, `r_comments`) VALUES
+                                                                                           (6,  7,  '2026-05-05 09:00', 'Knie',        'MRT nach Sportverletzung'),
+                                                                                           (7,  8,  '2026-05-05 11:00', 'Schädel',     'CT Kontrolltermin'),
+                                                                                           (9,  9,  '2026-05-06 08:30', 'Herz',        'Rhythmusstörung abklären'),
+                                                                                           (10, 10, '2026-05-06 10:00', 'Thorax',      'Defi-Check nach Ohnmacht'),
+                                                                                           (8,  11, '2026-05-07 13:15', 'Bauch',       'Röntgen nach Sturz'),
+                                                                                           (21, 12, '2026-05-08 09:45', 'Bein',        'Laparoskopie Vorbesprechung'),
+                                                                                           (22, 13, '2026-05-08 14:00', 'Gehirn',      'EEG Erstuntersuchung');
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
